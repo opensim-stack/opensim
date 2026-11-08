@@ -142,7 +142,7 @@ namespace OpenSim.Data.PGSQL
             {
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
-                    cmd.CommandText = $"update {m_Realm} set parentFolderID = :ParentFolderID where inventoryID = :InventoryID";
+                    cmd.CommandText = $"update {m_Realm} set \"parentFolderID\" = :ParentFolderID where \"inventoryID\" = :InventoryID";
                     cmd.Parameters.Add(m_database.CreateParameter("ParentFolderID", newParent));
                     cmd.Parameters.Add(m_database.CreateParameter("InventoryID", id ));
                     cmd.Connection = conn;
@@ -169,9 +169,7 @@ namespace OpenSim.Data.PGSQL
             {
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
-                    // cmd.CommandText = String.Format(@"select * from inventoryitems where ""avatarID"" = :uuid and ""assetType"" = :type and ""flags"" = 1", m_Realm);
-
-                    cmd.CommandText = "select * from inventoryitems where \"avatarID\" = :uuid and \"assetType\" = :type and \"flags\" = 1";
+                    cmd.CommandText = "select * from inventoryitems where \"avatarID\" = :uuid and \"assetType\" = :type and (\"flags\" & 1) = 1";
 
                     cmd.Parameters.Add(m_database.CreateParameter("uuid", principalID));
                     cmd.Parameters.Add(m_database.CreateParameter("type", (int)AssetType.Gesture));
@@ -195,11 +193,11 @@ namespace OpenSim.Data.PGSQL
                                    and ""assetID"" = :AssetID
                                  group by ""assetID"" ", m_Realm);
 */
-                    cmd.CommandText = @"select bit_or(inventoryCurrentPermissions) as inventoryCurrentPermissions
+                    cmd.CommandText = @"select bit_or(""inventoryCurrentPermissions"") as ""inventoryCurrentPermissions""
                                  from inventoryitems
-                                 where avatarID::uuid = :PrincipalID
-                                   and assetID::uuid = :AssetID
-                                 group by assetID";
+                                 where ""avatarID""::uuid = :PrincipalID
+                                   and ""assetID""::uuid = :AssetID
+                                 group by ""assetID""";
 
                     cmd.Parameters.Add(m_database.CreateParameter("PrincipalID", principalID));
                     cmd.Parameters.Add(m_database.CreateParameter("AssetID", assetID));
@@ -260,7 +258,7 @@ namespace OpenSim.Data.PGSQL
                 using (NpgsqlCommand cmd = new NpgsqlCommand())
                 {
 
-                    cmd.CommandText = $"update {m_Realm} set parentFolderID = :ParentFolderID where folderID = :folderID";
+                    cmd.CommandText = $"update {m_Realm} set \"parentFolderID\" = :ParentFolderID where \"folderID\" = :folderID";
                     cmd.Parameters.Add(m_database.CreateParameter("ParentFolderID", newPar));
                     cmd.Parameters.Add(m_database.CreateParameter("folderID", foldID));
                     cmd.Connection = conn;
