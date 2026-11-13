@@ -1990,6 +1990,42 @@
 
     </Project>
 
+    <Project name="OpenSim.Addons.DisplayName" path="OpenSim/Addons/DisplayName" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>../../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+
+      <ReferencePath>../../../bin/</ReferencePath>
+
+      <Reference name="Nini"/>
+      <Reference name="Mono.Addins"/>
+      <Reference name="log4net"/>
+      <Reference name="OpenMetaverse"/>
+      <Reference name="OpenMetaverseTypes"/>
+      <Reference name="OpenMetaverse.StructuredData"/>
+
+      <Reference name="OpenSim.Framework"/>
+      <Reference name="OpenSim.Capabilities"/>
+      <Reference name="OpenSim.Framework.Servers.HttpServer"/>
+      <Reference name="OpenSim.Services.Interfaces"/>
+      <Reference name="OpenSim.Region.Framework"/>
+
+      <Files>
+        <Match pattern="*.cs" recurse="true">
+          <Exclude name="obj" pattern="obj"/>
+          <Exclude pattern="Tests" />
+        </Match>
+      </Files>
+
+    </Project>
+
 
     <!-- Tools -->
 

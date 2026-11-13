@@ -777,6 +777,19 @@
     Cap_GetMesh = "localhost"
     Cap_AvatarPickerSearch = "localhost"
     Cap_GetDisplayNames = "localhost"
+    ; SetDisplayName requires an addon module implementation.
+    ; Cap_SetDisplayName = "localhost"
+
+
+[DisplayName]
+    ; Optional addon capability module for SetDisplayName.
+    ; Leave disabled unless OpenSim/Addons/DisplayName is present.
+    ; Enabled = false
+    ; Cap_SetDisplayName = "localhost"
+    ; RequireOldNameMatch = true
+    ; MinLength = 3
+    ; MaxLength = 31
+    ; ChangeCooldownSeconds = 604800
 
 
 [SimulatorFeatures]
